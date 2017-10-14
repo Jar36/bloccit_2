@@ -18,6 +18,7 @@ group :production do
 # Use sqlite3 as the database for Active Record
 group :development do 
   gem 'sqlite3'
+  
 end
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
@@ -44,8 +45,10 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+   gem 'rspec-rails', '~> 3.0'
+   gem 'rails-controller-testing'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  #gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
 group :development do

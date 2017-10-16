@@ -1,6 +1,8 @@
 require 'random_data'
-Post.destroy_all
-Comment.destroy_all
+# Post.destroy_all
+# Comment.destroy_all
+
+
  # Create Posts
  50.times do
  # #1

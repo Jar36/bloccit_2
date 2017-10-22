@@ -49,6 +49,7 @@ gem 'bootstrap-sass'
 group :development, :test do
    gem 'rspec-rails', '~> 3.0'
    gem 'rails-controller-testing'
+   gem 'shoulda'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   #gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end

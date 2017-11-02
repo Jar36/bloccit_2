@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe SponsoredPostsController, type: :controller do
-  let(:my_topic) { Topic.create!(name:  RandomData.random_sentence, description: RandomData.random_paragraph) }
+  let(:my_topic) { Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph) }
   let(:sponsored_post) { my_topic.sponsored_posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph) }
   
   
@@ -39,6 +39,22 @@ RSpec.describe SponsoredPostsController, type: :controller do
        expect(assigns(:sponsored_post)).not_to be_nil
      end
    end
+   
+   describe "SPONSORED POST create" do
+      it "increases the number of SponsoredPost by 1" do
+        expect{ sponsored_post :create, params: { topic_id: my_topic.id, sponsored_post: { title: RandomData.random_sentence, body: RandomData.random_paragraph } } }.to change(SponsoredPost,:count).by(1)
+      end
+ 
+      it "assigns the new sponsored_post to @sponsored_post" do
+        sponsored_post :create, params: { topic_id: my_topic.id, sponsored_post: { title: RandomData.random_sentence, body: RandomData.random_paragraph } }
+        expect(assigns(:post)).to eq SponsoredPost.last
+      end
+ 
+      it "redirects to the new sponsored_post" do
+        sponsored_post :create, params: { topic_id: my_topic.id, sponsored_post: { title: RandomData.random_sentence, body: RandomData.random_paragraph } }
+        expect(response).to redirect_to [my_topic, SponsoredPost.last]
+      end
+    end
 
   describe "GET edit" do
      it "returns http success" do
@@ -66,7 +82,7 @@ RSpec.describe SponsoredPostsController, type: :controller do
        new_name = RandomData.random_sentence
        new_description = RandomData.random_paragraph
  
-       put :update, params: { topic_id: my_topic.id, sponsored_post: { name: new_name, description: new_description } }
+       put :update, params: { topic_id: my_topic.id, id: sponsored_post.id, sponsored_post: { name: new_name, description: new_description } }
  
        updated_sponsored_post = assigns(:sponsored_post)
        expect(updated_sponsored_post.id).to eq my_topic.id

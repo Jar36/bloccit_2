@@ -115,20 +115,20 @@ RSpec.describe SponsoredPostsController, type: :controller do
  
        put :update, params: { topic_id: my_topic.id, id: sponsored_post.id, 
            sponsored_post: { title: new_title, body: new_body } }
-       expect(response).to redirect_to sponsored_post
+       expect(response).to redirect_to [my_topic, sponsored_post]
      end
    end
    
    describe "DELETE destroy" do
      it "deletes the topic" do
        delete :destroy, params: { topic_id: my_topic.id, id: sponsored_post.id }
-       count = SponsoredPost.where({ topic_id: my_topic.id, id: sponsored_post.id })
+       count = SponsoredPost.where({ topic_id: my_topic.id, id: sponsored_post.id }).size
        expect(count).to eq 0
      end
    
      it "redirects to topics index" do
        delete :destroy, params: { topic_id: my_topic.id, id: sponsored_post.id }
-       expect(response).to redirect_to sponsored_post
+       expect(response).to redirect_to my_topic
      end
    end
 end

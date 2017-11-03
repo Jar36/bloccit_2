@@ -1,6 +1,6 @@
 class SponsoredPostsController < ApplicationController
   def show
-    @sponsored_post = SponsoredPost.find(params[:topic_id])
+    @sponsored_post = SponsoredPost.find(params[:id])
   end
 
   def new
@@ -27,11 +27,11 @@ class SponsoredPostsController < ApplicationController
   end
 
   def edit
-    @sponsored_post = SponsoredPost.find(params[:sponsored_post_id])
+    @sponsored_post = SponsoredPost.find(params[:id])
   end
   
   def update
-     @sponsored_post = SponsoredPost.find(params[:sponsored_post_id])
+     @sponsored_post = SponsoredPost.find(params[:id])
      @sponsored_post.title = params[:sponsored_post][:title]
      @sponsored_post.body = params[:sponsored_post][:body]
      @sponsored_post.price = params[:sponsored_post][:price]
@@ -46,26 +46,13 @@ class SponsoredPostsController < ApplicationController
   end
   
   def destroy
-     @sponsored_post = SponsoredPost.find(params[:sponsored_post_id])
+     @sponsored_post = SponsoredPost.find(params[:id])
  
      if @sponsored_post.destroy
        flash[:notice] = "\"#{@sponsored_post.title}\" was deleted successfully."
        redirect_to @sponsored_post.topic
      else
        flash.now[:alert] = "There was an error deleting the post."
-       render :show
-     end
-  end
- 
- 
-  def destroy
-     @sponsored_post = SponsoredPost.find(params[:sponsored_post_id])
- 
-     if @sponsored_post.destroy
-       flash[:notice] = "\"#{@sponsored_post.title}\" was deleted successfully."
-       redirect_to action: :index
-     else
-       flash.now[:alert] = "There was an error deleting the Sponsored Post."
        render :show
      end
   end

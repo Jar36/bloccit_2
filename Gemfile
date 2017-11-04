@@ -47,7 +47,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootstrap-sass'
 
 # Used for encrypting passwords
- gem 'bcrypt'
+gem 'bcrypt'
 
 group :development, :test do
    gem 'rspec-rails', '~> 3.0'

@@ -58,11 +58,6 @@ RSpec.describe SessionsController, type: :controller do
        delete :destroy, params: { id: my_user.id }
        expect(flash[:notice]).to be_present
      end
-     
-     it "logs the user in after sign up" do
-       post :create, params: { user: new_user_attributes }
-       expect(session[:user_id]).to eq assigns(:user).id
-     end
-   end
+  end
 
 end

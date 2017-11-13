@@ -23,5 +23,8 @@ class UsersController < ApplicationController
   def show 
     @user = User.find(params[:id])
     @posts = @user.posts.visible_to(current_user)
+    @favorite_posts = []
+    @favorite_posts = @user.favorites.each { |favorite| @favorite_posts << favorite.post }
+  
   end
 end

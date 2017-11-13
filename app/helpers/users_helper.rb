@@ -7,6 +7,7 @@ module UsersHelper
     @user.comments.any?
   end
   
+  
   def has_favorites?(user)
     user.favorites.any?
   end

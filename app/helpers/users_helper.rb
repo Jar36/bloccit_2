@@ -1,10 +1,10 @@
 module UsersHelper
-  def has_posts?(post)
+  def has_posts?(has)
     @user.posts.any?
   end
 
   def has_comments?(user)
-    @user.comments.any?
+    user.comments.any?
   end
   
   
